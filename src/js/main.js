@@ -1,1 +1,3 @@
-console.log("BIDCAMP JavaScript is working!");
+import { initMobileMenu } from "./mobileMenu.js";
+
+initMobileMenu();

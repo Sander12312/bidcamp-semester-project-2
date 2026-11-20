@@ -1,1 +1,16 @@
 @import "tailwindcss";
+@import "./typography.css";
+@import "./layout.css";
+@import "./components.css";
+
+@theme {
+  --color-primary: #7b0b7d;
+  --color-cta: #ffd629;
+  --color-warning: #d32f2f;
+  --color-background: #ebc2ff;
+  --color-card: #e3e3e3;
+  --color-success: #00bc16;
+  --color-modal: #3a1a3b;
+  --color-text-light: #ffffff;
+  --color-text-dark: #000000;
+}

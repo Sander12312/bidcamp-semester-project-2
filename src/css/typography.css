@@ -1,0 +1,14 @@
+.page-title {
+  @apply text-2xl font-bold leading-tight md:text-4xl;
+}
+
+.section-title {
+  @apply text-2xl font-semibold;
+}
+
+.body-text {
+  @apply text-base leading-relaxed;
+}
+.site-logo {
+  @apply text-xl font-bold tracking-wide text-white;
+}

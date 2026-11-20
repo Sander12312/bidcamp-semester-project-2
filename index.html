@@ -6,9 +6,97 @@
     <title>BIDCAMP | Online Auctions</title>
     <link rel="stylesheet" href="/src/css/style.css" />
   </head>
+
   <body>
-    <h1 class="text-4xl font-bold text-blue-600">Welcome to BIDCAMP</h1>
-    <p>Discover, bid and win.</p>
+    <!-- Header -->
+
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="/" class="site-logo">BIDCAMP</a>
+
+        <ul class="nav-links">
+          <li>
+            <a href="/" aria-current="page">Home</a>
+          </li>
+          <li>
+            <a href="/explore">Explore</a>
+          </li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="/login" class="btn btn-outline-light"> Log in </a>
+          <a href="/register" class="btn btn-cta"> Register </a>
+        </div>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          ☰
+        </button>
+      </nav>
+
+      <!-- Mobile Navigation -->
+
+      <nav
+        id="mobile-menu"
+        class="mobile-menu"
+        aria-label="Mobile navigation"
+        inert
+      >
+        <button type="button" class="mobile-menu-close" aria-label="Close menu">
+          &times;
+        </button>
+
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/explore">Explore</a></li>
+          <li><a href="/notifications">Notifications</a></li>
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/login">Log in</a></li>
+          <li><a href="/register">Register</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+
+    <main class="page-main">
+      <div class="page-container">
+        <!-- Hero Section -->
+
+        <section
+          class="grid items-center gap-8 rounded-xl bg-modal p-6 text-text-light md:grid-cols-2 md:p-10"
+          aria-labelledby="hero-title"
+        >
+          <div class="order-2 flex flex-col gap-4 md:order-1">
+            <h1 id="hero-title" class="page-title">
+              Buy and sell with your community
+            </h1>
+
+            <p class="body-text">
+              Do a good deed and connect with the people around you.
+            </p>
+
+            <div class="mt-4 flex flex-col gap-3 sm:flex-row">
+              <a href="/explore" class="btn btn-outline-light"> Explore now </a>
+
+              <a href="/register" class="btn btn-cta"> Create account </a>
+            </div>
+          </div>
+
+          <img
+            src="/images/BIDCAMP-logo.png"
+            alt="BIDCAMP auction platform for students"
+            class="order-1 w-full rounded-lg md:order-2"
+          />
+        </section>
+      </div>
+    </main>
+
     <script type="module" src="/src/js/main.js"></script>
   </body>
 </html>

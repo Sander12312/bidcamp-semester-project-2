@@ -1,0 +1,123 @@
+/* Header and Navigation */
+
+.site-header {
+  @apply bg-primary text-text-light;
+}
+
+.site-nav {
+  @apply mx-auto flex w-full max-w-6xl items-center
+    justify-between gap-4 px-4 py-4 md:px-8;
+}
+
+.nav-links {
+  @apply hidden items-center gap-6 md:flex;
+}
+
+.nav-actions {
+  @apply hidden items-center gap-3 md:flex;
+}
+
+.nav-links a {
+  @apply text-base font-medium text-text-light
+    transition-opacity duration-200;
+}
+
+.nav-links a:hover {
+  @apply opacity-80;
+}
+
+.nav-links a[aria-current="page"] {
+  @apply underline decoration-cta underline-offset-4;
+}
+
+.nav-links a:focus-visible {
+  @apply outline-2 outline-offset-4 outline-cta;
+}
+
+/* Buttons */
+
+.btn {
+  @apply inline-flex min-h-11 items-center justify-center
+    rounded-md border px-5 py-2.5 text-base font-semibold
+    transition-colors duration-200;
+}
+
+.btn-outline-light {
+  @apply border-text-light bg-transparent text-text-light;
+}
+
+.btn-outline-light:hover {
+  @apply border-cta bg-cta text-text-dark;
+}
+
+.btn-cta {
+  @apply border-cta bg-cta text-text-dark;
+}
+
+.btn-cta:hover {
+  @apply border-text-light bg-transparent text-text-light;
+}
+
+.btn:focus-visible {
+  @apply outline-2 outline-offset-2 outline-cta;
+}
+
+/* Mobile Navigation */
+
+.menu-toggle {
+  @apply inline-flex h-11 w-11 items-center justify-center
+    rounded-md text-2xl transition-opacity duration-200
+    hover:opacity-80 focus-visible:outline-2
+    focus-visible:outline-offset-2 focus-visible:outline-cta
+    md:hidden;
+}
+
+.mobile-menu {
+  @apply fixed top-0 right-0 z-50 h-dvh w-56 max-w-full
+    bg-primary p-4 text-text-light shadow-xl md:hidden;
+
+  transform: translateX(100%);
+  visibility: hidden;
+
+  transition:
+    transform 300ms ease-in-out,
+    visibility 0s linear 300ms;
+}
+
+.mobile-menu.is-open {
+  transform: translateX(0);
+  visibility: visible;
+
+  transition:
+    transform 300ms ease-in-out,
+    visibility 0s;
+}
+
+.mobile-menu-close {
+  @apply ml-auto flex h-11 w-11 items-center
+    justify-center rounded-md text-3xl
+    focus-visible:outline-2 focus-visible:outline-cta;
+}
+
+.mobile-menu ul {
+  @apply mt-6 flex flex-col items-center gap-3;
+}
+
+.mobile-menu a {
+  @apply inline-block rounded-md px-3 py-2
+    text-base font-medium transition-opacity duration-200
+    hover:opacity-80 focus-visible:outline-2
+    focus-visible:outline-offset-2 focus-visible:outline-cta;
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu,
+  .menu-toggle,
+  .btn,
+  .nav-links a,
+  .mobile-menu a {
+    transition: none;
+  }
+}
