@@ -5,8 +5,7 @@
 }
 
 .site-nav {
-  @apply mx-auto flex w-full max-w-6xl items-center
-    justify-between gap-4 px-4 py-4 md:px-8;
+  @apply mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-8;
 }
 
 .nav-links {
@@ -18,8 +17,7 @@
 }
 
 .nav-links a {
-  @apply text-base font-medium text-text-light
-    transition-opacity duration-200;
+  @apply text-base font-medium text-text-light transition-opacity duration-200;
 }
 
 .nav-links a:hover {
@@ -37,9 +35,7 @@
 /* Buttons */
 
 .btn {
-  @apply inline-flex min-h-11 items-center justify-center
-    rounded-md border px-5 py-2.5 text-base font-semibold
-    transition-colors duration-200;
+  @apply inline-flex min-h-11 items-center justify-center rounded-md border px-5 py-2.5 text-base font-semibold transition-colors duration-200;
 }
 
 .btn-outline-light {
@@ -65,20 +61,13 @@
 /* Mobile Navigation */
 
 .menu-toggle {
-  @apply inline-flex h-11 w-11 items-center justify-center
-    rounded-md text-2xl transition-opacity duration-200
-    hover:opacity-80 focus-visible:outline-2
-    focus-visible:outline-offset-2 focus-visible:outline-cta
-    md:hidden;
+  @apply inline-flex h-11 w-11 items-center justify-center rounded-md text-2xl transition-opacity duration-200 hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta md:hidden;
 }
 
 .mobile-menu {
-  @apply fixed top-0 right-0 z-50 h-dvh w-56 max-w-full
-    bg-primary p-4 text-text-light shadow-xl md:hidden;
-
+  @apply fixed top-0 right-0 z-50 h-dvh w-56 max-w-full bg-primary p-4 text-text-light shadow-xl md:hidden;
   transform: translateX(100%);
   visibility: hidden;
-
   transition:
     transform 300ms ease-in-out,
     visibility 0s linear 300ms;
@@ -87,16 +76,13 @@
 .mobile-menu.is-open {
   transform: translateX(0);
   visibility: visible;
-
   transition:
     transform 300ms ease-in-out,
     visibility 0s;
 }
 
 .mobile-menu-close {
-  @apply ml-auto flex h-11 w-11 items-center
-    justify-center rounded-md text-3xl
-    focus-visible:outline-2 focus-visible:outline-cta;
+  @apply ml-auto flex h-11 w-11 items-center justify-center rounded-md text-3xl focus-visible:outline-2 focus-visible:outline-cta;
 }
 
 .mobile-menu ul {
@@ -104,20 +90,84 @@
 }
 
 .mobile-menu a {
-  @apply inline-block rounded-md px-3 py-2
-    text-base font-medium transition-opacity duration-200
-    hover:opacity-80 focus-visible:outline-2
-    focus-visible:outline-offset-2 focus-visible:outline-cta;
+  @apply inline-block rounded-md px-3 py-2 text-base font-medium transition-opacity duration-200 hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta;
+}
+
+/* Search and Filters */
+
+.auction-control {
+  @apply w-full rounded-lg bg-primary/20 px-4 py-3 text-text-dark focus-visible:outline-2 focus-visible:outline-primary;
+}
+
+.auction-search {
+  @apply pl-10 placeholder:text-text-dark/60;
+}
+
+.auction-search-icon {
+  @apply pointer-events-none absolute top-1/2 left-3 size-5 -translate-y-1/2 text-text-dark/60;
+}
+
+.auction-filter-button {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 font-semibold text-text-light transition-opacity duration-200 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+}
+
+/* Auction Cards */
+
+.listing-card {
+  @apply flex min-w-0 flex-col overflow-hidden
+    rounded-lg bg-card;
+
+  box-shadow: 0 3px 4px rgb(0 0 0 / 18%);
+}
+
+.listing-card-image {
+  @apply aspect-[4/3] w-full bg-primary/10 object-cover;
+}
+
+.listing-card-placeholder {
+  @apply flex flex-col items-center justify-center gap-2 bg-primary/10 px-2 text-center text-primary/70;
+}
+.listing-card-title {
+  @apply mx-2 mt-2 line-clamp-2 text-text-dark;
+}
+
+.listing-card-category {
+  @apply mx-2 mt-1 w-fit max-w-[90%] truncate rounded-full bg-primary/30 px-2 py-1 text-text-dark;
+}
+
+.listing-card-bid {
+  @apply mx-2 mt-2 flex items-center gap-1 text-text-dark;
+}
+
+.listing-card-bid-label {
+  @apply mx-2 mt-0.5 pl-5 text-text-dark;
+}
+
+.listing-card-time {
+  @apply mx-2 mb-3 mt-auto flex items-center gap-1 pt-3 text-warning;
+}
+
+.listing-card-clock-icon {
+  @apply text-primary;
+}
+
+.listing-icon {
+  @apply size-4 shrink-0;
+}
+
+.listing-card-view-details {
+  @apply mt-3 mb-3 hidden min-h-6 self-center items-center justify-center rounded-full border-2 border-primary bg-transparent px-3 py-1 text-primary transition-colors duration-200 hover:border-transparent hover:bg-primary/30 hover:text-text-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:inline-flex;
 }
 
 /* Accessibility */
 
 @media (prefers-reduced-motion: reduce) {
   .mobile-menu,
-  .menu-toggle,
   .btn,
   .nav-links a,
-  .mobile-menu a {
+  .menu-toggle,
+  .auction-filter-button,
+  .listing-card-view-details {
     transition: none;
   }
 }
