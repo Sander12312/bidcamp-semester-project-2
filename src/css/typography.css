@@ -13,13 +13,15 @@
 }
 
 .site-logo {
-  @apply text-xl font-bold tracking-wide text-text-light md:text-2xl;
+  @apply text-xl font-bold tracking-wide
+    text-text-light md:text-2xl;
 }
 
 /* Auction Card Typography */
 
 .listing-card-title-text {
-  @apply text-sm font-bold leading-tight md:text-base md:font-extrabold;
+  @apply text-sm font-bold leading-tight
+    md:text-base md:font-extrabold;
 }
 
 .listing-card-tag-text {
@@ -40,4 +42,40 @@
 
 .listing-card-action-text {
   @apply text-sm font-extrabold leading-none;
+}
+
+/* Authentication Typography */
+
+.auth-brand {
+  @apply text-3xl font-extrabold;
+}
+
+.auth-title {
+  @apply mt-3 text-lg font-bold;
+}
+
+.auth-description {
+  @apply text-xs leading-relaxed;
+}
+
+.auth-label {
+  @apply text-sm font-semibold;
+}
+
+.auth-tab {
+  @apply text-sm font-bold;
+}
+
+.auth-divider {
+  @apply text-sm font-semibold;
+}
+
+/* Form Feedback */
+
+.auth-error {
+  @apply text-sm font-semibold text-warning;
+}
+
+.auth-success {
+  @apply text-sm font-semibold text-success;
 }

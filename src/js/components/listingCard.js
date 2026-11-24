@@ -156,7 +156,7 @@ export function createListingCard(listing) {
 
   category.className = "listing-card-category listing-card-tag-text";
 
-  category.textContent = listing.tags?.[0] || "No category";
+  category.textContent = listing.category || "Other";
 
   card.append(category);
 

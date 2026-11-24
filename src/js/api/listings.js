@@ -98,6 +98,16 @@ const CATEGORY_KEYWORDS = {
 
 function getListingCategory(listing) {
   const tags = Array.isArray(listing.tags) ? listing.tags : [];
+  const selectedCategory = CATEGORIES.find((category) =>
+    tags.some(
+      (tag) =>
+        typeof tag === "string" && tag.toLowerCase() === category.toLowerCase(),
+    ),
+  );
+
+  if (selectedCategory) {
+    return selectedCategory;
+  }
 
   const searchableText = [listing.title ?? "", ...tags]
     .join(" ")
@@ -195,7 +205,10 @@ export async function getListings(searchTerm = "", signal, options = {}) {
   });
 
   return {
-    listings: matches.slice(0, 12),
+    listings: matches.slice(0, 12).map((listing) => ({
+      ...listing,
+      category: getListingCategory(listing),
+    })),
     totalCount: matches.length,
     categories: CATEGORIES,
   };
