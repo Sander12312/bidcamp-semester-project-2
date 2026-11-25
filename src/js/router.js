@@ -1,5 +1,7 @@
 import { createLoginPage } from "./pages/login.js";
 import { createRegisterPage } from "./pages/register.js";
+import { createProfilePage } from "./pages/profilePage.js";
+import { getSession } from "./auth/session.js";
 
 export function initRouter() {
   const homePage = document.querySelector("#home-page");
@@ -7,29 +9,42 @@ export function initRouter() {
 
   if (!homePage || !authPage) return;
 
-  const supportedPaths = ["/", "/explore", "/login", "/register"];
+  const supportedPaths = ["/", "/explore", "/login", "/register", "/profile"];
 
-  // Render Page
+  // Render Current Page
 
   function renderPage() {
-    const path = window.location.pathname;
+    let path = window.location.pathname;
+
+    // Protect Profile Page
+
+    if (path === "/profile" && !getSession()?.accessToken) {
+      window.history.replaceState({}, "", "/login");
+      path = "/login";
+    }
 
     const isLoginPage = path === "/login";
     const isRegisterPage = path === "/register";
-    const isAuthPage = isLoginPage || isRegisterPage;
+    const isProfilePage = path === "/profile";
 
-    homePage.hidden = isAuthPage;
-    authPage.hidden = !isAuthPage;
+    const isDynamicPage = isLoginPage || isRegisterPage || isProfilePage;
+
+    homePage.hidden = isDynamicPage;
+    authPage.hidden = !isDynamicPage;
+
+    // Render Page Content
 
     if (isLoginPage) {
       authPage.replaceChildren(createLoginPage());
     } else if (isRegisterPage) {
       authPage.replaceChildren(createRegisterPage());
+    } else if (isProfilePage) {
+      authPage.replaceChildren(createProfilePage());
     } else {
       authPage.replaceChildren();
     }
 
-    // Update Navigation
+    // Update Active Navigation Link
 
     const navLinks = document.querySelectorAll(".site-header a[href]");
 
@@ -43,19 +58,20 @@ export function initRouter() {
       }
     });
 
-    // Update Page Title
+    // Update Document Title
 
     const pageTitles = {
       "/": "Online Auctions",
       "/explore": "Explore",
       "/login": "Log in",
       "/register": "Register",
+      "/profile": "My Profile",
     };
 
     document.title = `BIDCAMP | ${pageTitles[path] || "Online Auctions"}`;
   }
 
-  // Handle Navigation
+  // SPA Link Navigation
 
   document.addEventListener("click", (event) => {
     if (!(event.target instanceof Element)) return;
@@ -93,11 +109,10 @@ export function initRouter() {
       document.querySelector(".mobile-menu-close")?.click();
     }
 
-    // Update URL and Content
+    // Navigate Without Reloading
 
     if (url.pathname !== window.location.pathname) {
       window.history.pushState({}, "", url.pathname);
-
       renderPage();
       window.scrollTo(0, 0);
     }
@@ -107,7 +122,19 @@ export function initRouter() {
 
   window.addEventListener("popstate", renderPage);
 
-  // Initial Page
+  // Protect Profile After Logout
+
+  window.addEventListener("bidcamp:session-changed", () => {
+    if (window.location.pathname === "/profile") {
+      renderPage();
+    }
+  });
+
+  window.addEventListener("storage", () => {
+    if (window.location.pathname === "/profile") {
+      renderPage();
+    }
+  });
 
   renderPage();
 }

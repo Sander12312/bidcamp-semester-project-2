@@ -1,6 +1,5 @@
 import { loginUser } from "../api/auth.js";
-
-const AUTH_STORAGE_KEY = "bidcamp-auth";
+import { saveSession } from "../auth/session.js";
 
 export function createLoginPage() {
   const container = document.createElement("div");
@@ -159,19 +158,15 @@ export function createLoginPage() {
         email: user.email,
       };
 
-      sessionStorage.removeItem(AUTH_STORAGE_KEY);
-      localStorage.removeItem(AUTH_STORAGE_KEY);
-
-      const storage = rememberMe ? localStorage : sessionStorage;
-
-      storage.setItem(AUTH_STORAGE_KEY, JSON.stringify(session));
+      saveSession(session, rememberMe);
 
       // Success
 
-      status.className = "auth-success";
-      status.textContent = "You are now logged in!";
-
       form.reset();
+
+      window.history.replaceState({}, "", "/");
+      window.dispatchEvent(new PopStateEvent("popstate"));
+      window.scrollTo(0, 0);
     } catch (error) {
       // Error
 

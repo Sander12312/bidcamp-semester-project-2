@@ -2,9 +2,11 @@ import { initMobileMenu } from "./mobileMenu.js";
 import { getListings } from "./api/listings.js";
 import { createListingCard } from "./components/listingCard.js";
 import { initRouter } from "./router.js";
+import { initAuthNavigation } from "./components/authNavigation.js";
 
 initMobileMenu();
 initRouter();
+initAuthNavigation();
 
 function initListings() {
   const grid = document.querySelector("#auctions-grid");
