@@ -1,0 +1,45 @@
+# AI Usage Log
+
+**Tools Used**
+
+ChatGPT (OpenAI)
+
+During this assignment, I used ChatGPT as a learning and development assistant while building BIDCAMP, an auction platform using HTML, Tailwind CSS, JavaScript, Vite, and the Noroff Auction API v2.
+
+I mainly used ChatGPT to explore implementation approaches, understand technical concepts, troubleshoot issues, and improve the structure and maintainability of my application.
+
+ChatGPT also provided code examples and draft implementations for parts of the project. I worked with these suggestions during development, tested the results, and compared the implementation with my Figma designs and the assignment requirements.
+
+## Areas Where I Used AI
+
+**Purpose:**
+
+- Understanding the assignment requirements and planning the application structure.
+- Configuring Vite and Tailwind CSS.
+- Exploring approaches to JavaScript functionality, DOM manipulation, and API integration.
+- Understanding authentication and working with the Noroff Auction API v2.
+- Receiving implementation suggestions and code examples for different features.
+- Working with responsive layouts and mobile-first development.
+- Improving code organization through DRY and Separation of Concerns.
+- Troubleshooting errors and reviewing possible improvements.
+
+**Outcome:**
+
+- I developed the BIDCAMP design in Figma and used it as the main reference throughout development.
+- I set up the development environment using Vite and Tailwind CSS.
+- I worked with AI-assisted suggestions when implementing authentication, navigation, auction listings, and profile functionality.
+- I integrated functionality using the Noroff Auction API v2.
+- I used reusable JavaScript components and CSS classes to keep the application consistent.
+- I organized the code into separate files for API requests, pages, components, and styling.
+- I identified and resolved issues related to routing, imports, API data, and responsive layouts with debugging assistance.
+- I tested the application in the browser and made adjustments based on functionality, design consistency, and usability.
+
+**Reflection**
+
+Using ChatGPT helped me strengthen my understanding of JavaScript, API integration, and responsive development with Tailwind CSS.
+
+I became more aware of the importance of reusable components, DRY, and Separation of Concerns when building a larger application.
+
+AI was particularly useful for exploring solutions and troubleshooting problems during development. I also found it important to evaluate suggestions against the Noroff documentation and my own design requirements rather than treating every suggestion as the final solution.
+
+Overall, ChatGPT has been a useful supporting tool in my development process, helping me explore different approaches and improve the organization and functionality of BIDCAMP.

@@ -1,0 +1,301 @@
+/* Profile Page */
+
+.profile-section {
+  @apply py-5 md:py-8;
+}
+
+.profile-layout,
+.profile-listings-section {
+  @apply mx-auto w-full max-w-4xl;
+}
+
+/* Profile Banner */
+
+.profile-banner {
+  @apply relative h-40 overflow-hidden
+    rounded-lg bg-modal md:h-52;
+
+  background-image: linear-gradient(120deg, #3a1a3b, #7b0b7d);
+}
+
+.profile-banner-image {
+  @apply h-full w-full object-cover;
+
+  filter: brightness(0.8) contrast(1.2);
+}
+
+.profile-banner::after {
+  content: "";
+  @apply absolute inset-0;
+
+  background: linear-gradient(to top, rgb(0 0 0 / 65%), transparent 75%);
+}
+
+.profile-banner-content {
+  @apply absolute right-4 bottom-3 left-4 z-10
+    flex items-end gap-3
+    md:right-8 md:bottom-5 md:left-8;
+}
+
+.profile-avatar,
+.profile-avatar-fallback {
+  @apply flex size-20 shrink-0 items-center
+    justify-center rounded-full border-2
+    border-cta object-cover md:size-24;
+}
+
+.profile-avatar-fallback {
+  @apply bg-primary text-3xl font-bold
+    uppercase text-text-light;
+}
+
+.profile-banner-identity {
+  @apply flex min-w-0 flex-col
+    items-start gap-1;
+}
+
+.profile-banner-name {
+  @apply max-w-full break-words
+    text-xl font-bold text-text-light
+    md:hidden;
+}
+
+.profile-edit-button {
+  @apply rounded-full bg-primary px-3 py-1
+    text-xs font-semibold text-text-light;
+}
+
+.profile-edit-button:disabled {
+  @apply cursor-not-allowed opacity-80;
+}
+
+/* Profile Information */
+
+.profile-overview {
+  @apply mt-5 flex flex-col gap-5
+    md:grid md:grid-cols-2 md:gap-10;
+}
+
+.profile-about {
+  @apply min-w-0;
+}
+
+.profile-name {
+  @apply hidden text-2xl font-bold
+    text-text-dark md:block;
+}
+
+.profile-bio {
+  @apply whitespace-pre-line text-sm
+    leading-relaxed text-text-dark
+    md:mt-2;
+}
+
+/* Credit Score */
+
+.profile-credit-panel {
+  @apply flex flex-col items-center gap-3
+    rounded-lg bg-cta/60 p-5
+    text-text-dark
+    md:items-start md:justify-center
+    md:rounded-none md:border-l-2
+    md:border-text-dark md:bg-transparent
+    md:pl-10;
+}
+
+.profile-credit-title {
+  @apply text-xl font-bold;
+}
+
+.profile-credits-badge {
+  @apply gap-2 px-5;
+}
+
+.profile-credit-coin {
+  @apply inline-flex size-5 shrink-0
+    items-center justify-center
+    rounded-full border-2
+    border-text-dark
+    text-xs font-bold;
+}
+
+/* Profile Listings */
+
+.profile-listings-section {
+  @apply mt-8 pb-10 md:mt-12;
+}
+
+/* Profile Tabs */
+
+.auth-tabs.profile-tabs {
+  @apply mb-6 w-fit bg-primary;
+}
+
+.profile-tabs .auth-tab {
+  @apply cursor-pointer px-5 py-2
+    text-sm font-semibold text-text-light/70
+    transition-colors duration-200
+    hover:text-text-light
+    focus-visible:outline-2
+    focus-visible:outline-offset-2
+    focus-visible:outline-cta;
+}
+
+.profile-tabs .auth-tab-active {
+  @apply bg-fuchsia-600 text-text-light;
+}
+
+/* Listings Grid */
+
+.profile-listings-grid {
+  @apply grid grid-cols-2 gap-3
+    sm:gap-4 md:grid-cols-4;
+}
+
+.profile-listings-status {
+  @apply py-6 text-center
+    text-sm text-text-dark;
+}
+
+.profile-listings-status[hidden] {
+  display: none;
+}
+
+/* New Listing Buttons */
+
+.profile-new-listing-button {
+  @apply inline-flex min-h-10 items-center
+    justify-center rounded-md bg-primary
+    px-4 py-2 text-sm font-semibold
+    text-text-light transition-opacity
+    hover:opacity-80
+    focus-visible:outline-2
+    focus-visible:outline-offset-2
+    focus-visible:outline-primary;
+}
+
+.profile-new-listing-mobile {
+  @apply self-start md:hidden;
+}
+
+.profile-new-listing-desktop {
+  @apply hidden md:inline-flex;
+}
+
+/* Profile Listings Toolbar */
+
+.profile-listings-toolbar {
+  @apply mb-6 flex items-center
+    justify-center md:justify-between;
+}
+
+.profile-listings-toolbar .profile-tabs {
+  @apply mx-auto mb-0 md:mx-0;
+}
+
+/* Profile Cards */
+
+.profile-listings-grid .listing-card-view-details {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  z-index: 1;
+}
+
+/* Edit and Delete Buttons */
+
+.profile-listing-actions {
+  @apply relative z-20 mx-2 mt-2 mb-3
+    grid grid-cols-2 gap-2;
+}
+
+.profile-listing-actions .btn {
+  @apply min-h-7 min-w-0 rounded-full
+    px-1 py-1 text-xs leading-none;
+}
+
+.profile-listing-actions .profile-listing-edit {
+  @apply border-cta bg-cta text-text-dark
+    hover:border-cta hover:bg-cta/90
+    hover:text-text-dark;
+}
+
+.profile-listing-actions .profile-listing-delete {
+  @apply border-warning bg-warning text-text-light
+    hover:border-warning hover:bg-warning/90
+    hover:text-text-light;
+}
+
+/* Hide Inactive Tab Content */
+
+.profile-listings-grid[hidden],
+.profile-bids-list[hidden] {
+  display: none;
+}
+
+/* My Bids */
+
+.profile-bids-list {
+  @apply flex flex-col gap-3;
+}
+
+.profile-bid-row {
+  @apply flex flex-wrap items-center gap-3
+    rounded-lg bg-card p-3
+    text-text-dark shadow-sm;
+}
+
+.profile-bid-image {
+  @apply size-16 shrink-0 rounded-md
+    bg-primary/10 object-cover
+    sm:size-20;
+}
+
+.profile-bid-placeholder {
+  @apply flex items-center justify-center
+    px-1 text-center text-xs text-primary;
+}
+
+.profile-bid-info {
+  @apply flex min-w-0 flex-1
+    flex-col gap-1;
+}
+
+.profile-bid-title {
+  @apply break-words text-sm font-bold
+    sm:text-base;
+}
+
+.profile-bid-amount {
+  @apply text-sm font-semibold;
+}
+
+.profile-bid-status {
+  @apply text-xs text-primary;
+}
+
+.profile-bid-details {
+  @apply ml-auto inline-flex min-h-9
+    items-center justify-center
+    rounded-full border-2 border-primary
+    px-3 py-1 text-xs font-semibold
+    text-primary
+    hover:bg-primary hover:text-text-light
+    focus-visible:outline-2
+    focus-visible:outline-offset-2
+    focus-visible:outline-primary;
+}
+
+/* Reduced Motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-tabs .auth-tab {
+    transition: none;
+  }
+}

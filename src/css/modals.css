@@ -1,0 +1,100 @@
+/* Shared Modal Styles */
+
+.modal-dialog {
+  @apply m-auto max-h-[90dvh]
+    w-[calc(100%-2rem)] max-w-lg
+    overflow-y-auto rounded-lg
+    border border-text-light/20
+    bg-modal p-5 text-text-light
+    shadow-xl md:p-8;
+}
+
+.modal-dialog::backdrop {
+  background: rgb(0 0 0 / 70%);
+}
+
+/* Form */
+
+.modal-form {
+  @apply flex flex-col gap-3;
+}
+
+.modal-title {
+  @apply mb-2 border-b border-text-light/40
+    pb-3 text-center text-xl font-bold;
+}
+
+.modal-form label {
+  @apply text-sm font-semibold;
+}
+
+.modal-form input,
+.modal-form textarea,
+.modal-form select {
+  @apply w-full rounded-md bg-text-light
+    px-3 py-2.5 text-text-dark
+    focus-visible:outline-2
+    focus-visible:outline-cta;
+}
+
+/* Text and Feedback */
+
+.modal-hint {
+  @apply text-xs text-text-light/80;
+}
+
+.modal-feedback {
+  @apply text-sm text-text-light;
+}
+
+/* Buttons */
+
+.modal-actions {
+  @apply mt-3 grid grid-cols-2 gap-3;
+}
+
+.modal-actions .btn {
+  @apply min-w-0 px-2 text-sm;
+}
+
+/* Edit Profile Preview */
+
+.edit-profile-preview {
+  @apply relative mb-3 h-32
+    overflow-hidden rounded-lg bg-primary/20;
+}
+
+.edit-profile-banner-preview {
+  @apply h-full w-full object-cover;
+}
+
+.edit-profile-avatar-preview {
+  @apply absolute bottom-3 left-3 size-16
+    rounded-full border-2 border-cta
+    bg-primary object-cover;
+}
+
+.edit-profile-avatar-preview[hidden] {
+  display: none;
+}
+
+.modal-form input[readonly] {
+  @apply cursor-not-allowed opacity-70;
+}
+
+/* Delete Listing */
+
+.delete-listing-dialog {
+  @apply max-w-sm;
+}
+
+.delete-listing-message,
+.delete-listing-hint {
+  @apply text-center;
+}
+
+.modal-actions .modal-delete-button {
+  @apply border-warning bg-warning text-text-light
+    hover:border-warning hover:bg-warning/90
+    hover:text-text-light;
+}

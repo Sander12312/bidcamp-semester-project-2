@@ -4,9 +4,13 @@ import { createListingCard } from "./components/listingCard.js";
 import { initRouter } from "./router.js";
 import { initAuthNavigation } from "./components/authNavigation.js";
 
+// Initialize Navigation
+
 initMobileMenu();
 initRouter();
 initAuthNavigation();
+
+// Initialize Listings
 
 function initListings() {
   const grid = document.querySelector("#auctions-grid");
@@ -16,7 +20,6 @@ function initListings() {
   const searchInput = document.querySelector("#auction-search");
   const categorySelect = document.querySelector("#auction-category");
   const sortSelect = document.querySelector("#auction-sort");
-
   const categoryWrapper = document.querySelector("#auction-category-wrapper");
   const filterButton = document.querySelector("#auction-filter-button");
 
@@ -27,7 +30,7 @@ function initListings() {
   let searchTimeout;
   let activeController;
 
-  // Category options
+  // Category Options
 
   function updateCategories(categories) {
     const selectedCategory = categorySelect.value;
@@ -44,7 +47,7 @@ function initListings() {
     categorySelect.value = selectedCategory;
   }
 
-  // Load auctions
+  // Load Auctions
 
   async function loadListings() {
     activeController?.abort();
@@ -70,13 +73,20 @@ function initListings() {
 
       updateCategories(categories);
 
+      // Reuse the Shared Listing Card
+
       const cards = listings.map(createListingCard);
+
       grid.replaceChildren(...cards);
+
+      // Update Auction Count
 
       if (heading) {
         const count = totalCount > 99 ? "99+" : totalCount;
         heading.textContent = `Auctions(${count})`;
       }
+
+      // Empty State
 
       if (listings.length === 0) {
         status.textContent = "No auctions found.";
@@ -96,7 +106,7 @@ function initListings() {
     }
   }
 
-  // Search
+  // Search Auctions
 
   searchInput.addEventListener("input", () => {
     clearTimeout(searchTimeout);
@@ -109,19 +119,21 @@ function initListings() {
     searchTimeout = setTimeout(loadListings, 350);
   });
 
-  // Category and sorting
+  // Category Filter
 
   categorySelect.addEventListener("change", () => {
     clearTimeout(searchTimeout);
     loadListings();
   });
 
+  // Sort Auctions
+
   sortSelect.addEventListener("change", () => {
     clearTimeout(searchTimeout);
     loadListings();
   });
 
-  // Mobile category filter
+  // Mobile Category Filter
 
   if (categoryWrapper && filterButton) {
     filterButton.setAttribute("aria-controls", "auction-category-wrapper");
@@ -155,10 +167,11 @@ function initListings() {
     });
 
     mobileView.addEventListener("change", syncFilterState);
+
     syncFilterState();
   }
 
-  // Initial auctions
+  // Initial Auctions
 
   loadListings();
 }

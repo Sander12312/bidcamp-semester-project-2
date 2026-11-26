@@ -1,0 +1,122 @@
+/* Authentication */
+
+.auth-layout {
+  @apply mx-auto w-full max-w-sm py-6 md:py-10;
+}
+
+.auth-tabs {
+  @apply mx-auto mb-4 grid w-52 grid-cols-2
+    overflow-hidden rounded-md bg-primary/70;
+}
+
+.auth-tab {
+  @apply px-3 py-2 text-center text-text-light;
+}
+
+.auth-tab-active {
+  @apply bg-primary;
+}
+
+.auth-card {
+  @apply flex flex-col rounded-lg bg-primary
+    p-6 text-text-light shadow-md;
+}
+
+.auth-brand,
+.auth-title,
+.auth-description {
+  @apply text-center;
+}
+
+.auth-form {
+  @apply mt-5 flex flex-col gap-3;
+}
+
+.auth-field {
+  @apply flex flex-col gap-1;
+}
+
+.auth-input {
+  @apply w-full rounded-md border border-transparent
+    bg-text-light px-3 py-2.5 text-text-dark
+    focus-visible:border-cta focus-visible:outline-2
+    focus-visible:outline-cta;
+}
+
+.auth-submit {
+  @apply mt-3 w-full;
+}
+
+.auth-divider {
+  @apply mt-5 flex items-center gap-3;
+}
+
+.auth-divider span:first-child,
+.auth-divider span:last-child {
+  @apply h-px flex-1 bg-text-light/50;
+}
+
+.auth-secondary-link {
+  @apply mt-3 w-full;
+}
+
+/* Authenticated Navigation */
+
+.auth-credits {
+  @apply inline-flex min-h-11 shrink-0 items-center
+    justify-center whitespace-nowrap rounded-full
+    bg-cta px-4 text-sm font-bold text-text-dark;
+}
+
+.auth-credits-mobile {
+  @apply ml-auto min-h-9 px-2 text-[10px] md:hidden;
+}
+
+.auth-credits-mobile[hidden],
+.auth-profile-menu[hidden] {
+  display: none;
+}
+
+.auth-icon-button {
+  @apply inline-flex size-11 items-center justify-center
+    rounded-md text-text-light
+    transition-opacity duration-200
+    hover:opacity-80
+    focus-visible:outline-2
+    focus-visible:outline-offset-2
+    focus-visible:outline-cta;
+}
+
+.auth-icon-button:disabled {
+  @apply cursor-not-allowed opacity-70;
+}
+
+.auth-profile-wrapper {
+  @apply relative;
+}
+
+.auth-profile-menu {
+  @apply absolute top-full right-0 z-50 mt-2
+    w-52 rounded-lg border border-text-light/20
+    bg-primary p-3 text-text-light shadow-xl;
+}
+
+.auth-profile-name {
+  @apply mb-2 border-b border-text-light/30
+    pb-2 text-sm font-semibold;
+}
+
+.auth-profile-action,
+.auth-mobile-logout {
+  @apply w-full rounded-md px-3 py-2
+    text-left text-sm font-medium
+    text-text-light transition-colors duration-200
+    hover:bg-text-light/15
+    focus-visible:outline-2
+    focus-visible:outline-offset-2
+    focus-visible:outline-cta;
+}
+
+.auth-profile-action:disabled {
+  @apply cursor-not-allowed opacity-60;
+}

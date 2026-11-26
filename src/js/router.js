@@ -1,6 +1,7 @@
 import { createLoginPage } from "./pages/login.js";
 import { createRegisterPage } from "./pages/register.js";
 import { createProfilePage } from "./pages/profilePage.js";
+import { createDetailsPage } from "./pages/detailsPage.js";
 import { getSession } from "./auth/session.js";
 
 export function initRouter() {
@@ -27,7 +28,13 @@ export function initRouter() {
     const isRegisterPage = path === "/register";
     const isProfilePage = path === "/profile";
 
-    const isDynamicPage = isLoginPage || isRegisterPage || isProfilePage;
+    // Details Page
+
+    const isDetailsPage = path.startsWith("/listing/");
+    const listingId = isDetailsPage ? path.slice("/listing/".length) : null;
+
+    const isDynamicPage =
+      isLoginPage || isRegisterPage || isProfilePage || isDetailsPage;
 
     homePage.hidden = isDynamicPage;
     authPage.hidden = !isDynamicPage;
@@ -40,6 +47,8 @@ export function initRouter() {
       authPage.replaceChildren(createRegisterPage());
     } else if (isProfilePage) {
       authPage.replaceChildren(createProfilePage());
+    } else if (isDetailsPage) {
+      authPage.replaceChildren(createDetailsPage(listingId));
     } else {
       authPage.replaceChildren();
     }
@@ -68,7 +77,11 @@ export function initRouter() {
       "/profile": "My Profile",
     };
 
-    document.title = `BIDCAMP | ${pageTitles[path] || "Online Auctions"}`;
+    const pageTitle = isDetailsPage
+      ? "Auction Details"
+      : pageTitles[path] || "Online Auctions";
+
+    document.title = `BIDCAMP | ${pageTitle}`;
   }
 
   // SPA Link Navigation
@@ -94,9 +107,13 @@ export function initRouter() {
 
     const url = new URL(link.href);
 
+    // Allow Details Page Links
+
+    const isDetailsLink = url.pathname.startsWith("/listing/");
+
     if (
       url.origin !== window.location.origin ||
-      !supportedPaths.includes(url.pathname)
+      (!supportedPaths.includes(url.pathname) && !isDetailsLink)
     ) {
       return;
     }

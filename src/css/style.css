@@ -8,8 +8,10 @@
       "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-fuchsia-600: oklch(59.1% 0.293 322.896);
     --spacing: 0.25rem;
     --container-sm: 24rem;
+    --container-lg: 32rem;
     --container-4xl: 56rem;
     --container-6xl: 72rem;
     --text-xs: 0.75rem;
@@ -828,6 +830,7 @@
   }
 }
 .listing-card {
+  position: relative;
   display: flex;
   min-width: 0px;
   flex-direction: column;
@@ -971,6 +974,35 @@
   }
   @media (width >= 48rem) {
     display: inline-flex;
+  }
+}
+.listing-card-view-details::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+@media (max-width: 767px) {
+  .listing-card-view-details {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+    z-index: 1;
+  }
+}
+.listing-card:focus-within {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu, .btn, .nav-links a, .menu-toggle, .auction-filter-button, .listing-card-view-details, .auth-icon-button, .auth-profile-action, .auth-mobile-logout {
+    transition: none;
   }
 }
 .auth-layout {
@@ -1198,6 +1230,9 @@
     outline-width: 2px;
   }
   &:focus-visible {
+    outline-offset: 2px;
+  }
+  &:focus-visible {
     outline-color: var(--color-cta);
   }
 }
@@ -1211,7 +1246,7 @@
     padding-block: calc(var(--spacing) * 8);
   }
 }
-.profile-layout {
+.profile-layout, .profile-listings-section {
   margin-inline: auto;
   width: 100%;
   max-width: var(--container-4xl);
@@ -1419,9 +1454,487 @@
   --tw-font-weight: var(--font-weight-bold);
   font-weight: var(--font-weight-bold);
 }
+.profile-listings-section {
+  margin-top: calc(var(--spacing) * 8);
+  padding-bottom: calc(var(--spacing) * 10);
+  @media (width >= 48rem) {
+    margin-top: calc(var(--spacing) * 12);
+  }
+}
+.auth-tabs.profile-tabs {
+  margin-bottom: calc(var(--spacing) * 6);
+  width: fit-content;
+  background-color: var(--color-primary);
+}
+.profile-tabs .auth-tab {
+  cursor: pointer;
+  padding-inline: calc(var(--spacing) * 5);
+  padding-block: calc(var(--spacing) * 2);
+  font-size: var(--text-sm);
+  line-height: var(--tw-leading, var(--text-sm--line-height));
+  --tw-font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-semibold);
+  color: color-mix(in srgb, #ffffff 70%, transparent);
+  @supports (color: color-mix(in lab, red, red)) {
+    color: color-mix(in oklab, var(--color-text-light) 70%, transparent);
+  }
+  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+  transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+  transition-duration: var(--tw-duration, var(--default-transition-duration));
+  --tw-duration: 200ms;
+  transition-duration: 200ms;
+  &:hover {
+    @media (hover: hover) {
+      color: var(--color-text-light);
+    }
+  }
+  &:focus-visible {
+    outline-style: var(--tw-outline-style);
+    outline-width: 2px;
+  }
+  &:focus-visible {
+    outline-offset: 2px;
+  }
+  &:focus-visible {
+    outline-color: var(--color-cta);
+  }
+}
+.profile-tabs .auth-tab-active {
+  background-color: var(--color-fuchsia-600);
+  color: var(--color-text-light);
+}
+.profile-listings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--spacing) * 3);
+  @media (width >= 40rem) {
+    gap: calc(var(--spacing) * 4);
+  }
+  @media (width >= 48rem) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.profile-listings-status {
+  padding-block: calc(var(--spacing) * 6);
+  text-align: center;
+  font-size: var(--text-sm);
+  line-height: var(--tw-leading, var(--text-sm--line-height));
+  color: var(--color-text-dark);
+}
+.profile-listings-status[hidden] {
+  display: none;
+}
+.profile-new-listing-button {
+  display: inline-flex;
+  min-height: calc(var(--spacing) * 10);
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary);
+  padding-inline: calc(var(--spacing) * 4);
+  padding-block: calc(var(--spacing) * 2);
+  font-size: var(--text-sm);
+  line-height: var(--tw-leading, var(--text-sm--line-height));
+  --tw-font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-light);
+  transition-property: opacity;
+  transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+  transition-duration: var(--tw-duration, var(--default-transition-duration));
+  &:hover {
+    @media (hover: hover) {
+      opacity: 80%;
+    }
+  }
+  &:focus-visible {
+    outline-style: var(--tw-outline-style);
+    outline-width: 2px;
+  }
+  &:focus-visible {
+    outline-offset: 2px;
+  }
+  &:focus-visible {
+    outline-color: var(--color-primary);
+  }
+}
+.profile-new-listing-mobile {
+  align-self: flex-start;
+  @media (width >= 48rem) {
+    display: none;
+  }
+}
+.profile-new-listing-desktop {
+  display: none;
+  @media (width >= 48rem) {
+    display: inline-flex;
+  }
+}
+.profile-listings-toolbar {
+  margin-bottom: calc(var(--spacing) * 6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media (width >= 48rem) {
+    justify-content: space-between;
+  }
+}
+.profile-listings-toolbar .profile-tabs {
+  margin-inline: auto;
+  margin-bottom: 0px;
+  @media (width >= 48rem) {
+    margin-inline: 0px;
+  }
+}
+.profile-listings-grid .listing-card-view-details {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  z-index: 1;
+}
+.profile-listing-actions {
+  position: relative;
+  z-index: 20;
+  margin-inline: calc(var(--spacing) * 2);
+  margin-top: calc(var(--spacing) * 2);
+  margin-bottom: calc(var(--spacing) * 3);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--spacing) * 2);
+}
+.profile-listing-actions .btn {
+  min-height: calc(var(--spacing) * 7);
+  min-width: 0px;
+  border-radius: calc(infinity * 1px);
+  padding-inline: var(--spacing);
+  padding-block: var(--spacing);
+  font-size: var(--text-xs);
+  line-height: var(--tw-leading, var(--text-xs--line-height));
+  --tw-leading: 1;
+  line-height: 1;
+}
+.profile-listing-actions .profile-listing-edit {
+  border-color: var(--color-cta);
+  background-color: var(--color-cta);
+  color: var(--color-text-dark);
+  &:hover {
+    @media (hover: hover) {
+      border-color: var(--color-cta);
+    }
+  }
+  &:hover {
+    @media (hover: hover) {
+      background-color: color-mix(in srgb, #ffd629 90%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-cta) 90%, transparent);
+      }
+    }
+  }
+  &:hover {
+    @media (hover: hover) {
+      color: var(--color-text-dark);
+    }
+  }
+}
+.profile-listing-actions .profile-listing-delete {
+  border-color: var(--color-warning);
+  background-color: var(--color-warning);
+  color: var(--color-text-light);
+  &:hover {
+    @media (hover: hover) {
+      border-color: var(--color-warning);
+    }
+  }
+  &:hover {
+    @media (hover: hover) {
+      background-color: color-mix(in srgb, #d32f2f 90%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-warning) 90%, transparent);
+      }
+    }
+  }
+  &:hover {
+    @media (hover: hover) {
+      color: var(--color-text-light);
+    }
+  }
+}
+.profile-listings-grid[hidden], .profile-bids-list[hidden] {
+  display: none;
+}
+.profile-bids-list {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 3);
+}
+.profile-bid-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--spacing) * 3);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-card);
+  padding: calc(var(--spacing) * 3);
+  color: var(--color-text-dark);
+  --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+}
+.profile-bid-image {
+  width: calc(var(--spacing) * 16);
+  height: calc(var(--spacing) * 16);
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background-color: color-mix(in srgb, #7b0b7d 10%, transparent);
+  @supports (color: color-mix(in lab, red, red)) {
+    background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
+  }
+  object-fit: cover;
+  @media (width >= 40rem) {
+    width: calc(var(--spacing) * 20);
+    height: calc(var(--spacing) * 20);
+  }
+}
+.profile-bid-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: var(--spacing);
+  text-align: center;
+  font-size: var(--text-xs);
+  line-height: var(--tw-leading, var(--text-xs--line-height));
+  color: var(--color-primary);
+}
+.profile-bid-info {
+  display: flex;
+  min-width: 0px;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--spacing);
+}
+.profile-bid-title {
+  font-size: var(--text-sm);
+  line-height: var(--tw-leading, var(--text-sm--line-height));
+  --tw-font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-bold);
+  overflow-wrap: break-word;
+  @media (width >= 40rem) {
+    font-size: var(--text-base);
+    line-height: var(--tw-leading, var(--text-base--line-height));
+  }
+}
+.profile-bid-amount {
+  font-size: var(--text-sm);
+  line-height: var(--tw-leading, var(--text-sm--line-height));
+  --tw-font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-semibold);
+}
+.profile-bid-status {
+  font-size: var(--text-xs);
+  line-height: var(--tw-leading, var(--text-xs--line-height));
+  color: var(--color-primary);
+}
+.profile-bid-details {
+  margin-left: auto;
+  display: inline-flex;
+  min-height: calc(var(--spacing) * 9);
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(infinity * 1px);
+  border-style: var(--tw-border-style);
+  border-width: 2px;
+  border-color: var(--color-primary);
+  padding-inline: calc(var(--spacing) * 3);
+  padding-block: var(--spacing);
+  font-size: var(--text-xs);
+  line-height: var(--tw-leading, var(--text-xs--line-height));
+  --tw-font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  &:hover {
+    @media (hover: hover) {
+      background-color: var(--color-primary);
+    }
+  }
+  &:hover {
+    @media (hover: hover) {
+      color: var(--color-text-light);
+    }
+  }
+  &:focus-visible {
+    outline-style: var(--tw-outline-style);
+    outline-width: 2px;
+  }
+  &:focus-visible {
+    outline-offset: 2px;
+  }
+  &:focus-visible {
+    outline-color: var(--color-primary);
+  }
+}
 @media (prefers-reduced-motion: reduce) {
-  .mobile-menu, .btn, .nav-links a, .menu-toggle, .auction-filter-button, .listing-card-view-details, .auth-icon-button, .auth-profile-action, .auth-mobile-logout {
+  .profile-tabs .auth-tab {
     transition: none;
+  }
+}
+.modal-dialog {
+  margin: auto;
+  max-height: 90dvh;
+  width: calc(100% - 2rem);
+  max-width: var(--container-lg);
+  overflow-y: auto;
+  border-radius: var(--radius-lg);
+  border-style: var(--tw-border-style);
+  border-width: 1px;
+  border-color: color-mix(in srgb, #ffffff 20%, transparent);
+  @supports (color: color-mix(in lab, red, red)) {
+    border-color: color-mix(in oklab, var(--color-text-light) 20%, transparent);
+  }
+  background-color: var(--color-modal);
+  padding: calc(var(--spacing) * 5);
+  color: var(--color-text-light);
+  --tw-shadow: 0 20px 25px -5px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 8px 10px -6px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  @media (width >= 48rem) {
+    padding: calc(var(--spacing) * 8);
+  }
+}
+.modal-dialog::backdrop {
+  background: rgb(0 0 0 / 70%);
+}
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 3);
+}
+.modal-title {
+  margin-bottom: calc(var(--spacing) * 2);
+  border-bottom-style: var(--tw-border-style);
+  border-bottom-width: 1px;
+  border-color: color-mix(in srgb, #ffffff 40%, transparent);
+  @supports (color: color-mix(in lab, red, red)) {
+    border-color: color-mix(in oklab, var(--color-text-light) 40%, transparent);
+  }
+  padding-bottom: calc(var(--spacing) * 3);
+  text-align: center;
+  font-size: var(--text-xl);
+  line-height: var(--tw-leading, var(--text-xl--line-height));
+  --tw-font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-bold);
+}
+.modal-form label {
+  font-size: var(--text-sm);
+  line-height: var(--tw-leading, var(--text-sm--line-height));
+  --tw-font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-semibold);
+}
+.modal-form input, .modal-form textarea, .modal-form select {
+  width: 100%;
+  border-radius: var(--radius-md);
+  background-color: var(--color-text-light);
+  padding-inline: calc(var(--spacing) * 3);
+  padding-block: calc(var(--spacing) * 2.5);
+  color: var(--color-text-dark);
+  &:focus-visible {
+    outline-style: var(--tw-outline-style);
+    outline-width: 2px;
+  }
+  &:focus-visible {
+    outline-color: var(--color-cta);
+  }
+}
+.modal-hint {
+  font-size: var(--text-xs);
+  line-height: var(--tw-leading, var(--text-xs--line-height));
+  color: color-mix(in srgb, #ffffff 80%, transparent);
+  @supports (color: color-mix(in lab, red, red)) {
+    color: color-mix(in oklab, var(--color-text-light) 80%, transparent);
+  }
+}
+.modal-feedback {
+  font-size: var(--text-sm);
+  line-height: var(--tw-leading, var(--text-sm--line-height));
+  color: var(--color-text-light);
+}
+.modal-actions {
+  margin-top: calc(var(--spacing) * 3);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--spacing) * 3);
+}
+.modal-actions .btn {
+  min-width: 0px;
+  padding-inline: calc(var(--spacing) * 2);
+  font-size: var(--text-sm);
+  line-height: var(--tw-leading, var(--text-sm--line-height));
+}
+.edit-profile-preview {
+  position: relative;
+  margin-bottom: calc(var(--spacing) * 3);
+  height: calc(var(--spacing) * 32);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background-color: color-mix(in srgb, #7b0b7d 20%, transparent);
+  @supports (color: color-mix(in lab, red, red)) {
+    background-color: color-mix(in oklab, var(--color-primary) 20%, transparent);
+  }
+}
+.edit-profile-banner-preview {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.edit-profile-avatar-preview {
+  position: absolute;
+  bottom: calc(var(--spacing) * 3);
+  left: calc(var(--spacing) * 3);
+  width: calc(var(--spacing) * 16);
+  height: calc(var(--spacing) * 16);
+  border-radius: calc(infinity * 1px);
+  border-style: var(--tw-border-style);
+  border-width: 2px;
+  border-color: var(--color-cta);
+  background-color: var(--color-primary);
+  object-fit: cover;
+}
+.edit-profile-avatar-preview[hidden] {
+  display: none;
+}
+.modal-form input[readonly] {
+  cursor: not-allowed;
+  opacity: 70%;
+}
+.delete-listing-dialog {
+  max-width: var(--container-sm);
+}
+.delete-listing-message, .delete-listing-hint {
+  text-align: center;
+}
+.modal-actions .modal-delete-button {
+  border-color: var(--color-warning);
+  background-color: var(--color-warning);
+  color: var(--color-text-light);
+  &:hover {
+    @media (hover: hover) {
+      border-color: var(--color-warning);
+    }
+  }
+  &:hover {
+    @media (hover: hover) {
+      background-color: color-mix(in srgb, #d32f2f 90%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-warning) 90%, transparent);
+      }
+    }
+  }
+  &:hover {
+    @media (hover: hover) {
+      color: var(--color-text-light);
+    }
   }
 }
 @property --tw-blur {

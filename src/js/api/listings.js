@@ -1,5 +1,6 @@
 const API_URL = "https://v2.api.noroff.dev/auction/listings";
 
+import { getSession } from "../auth/session.js";
 import { CATEGORIES } from "../constants/categories.js";
 
 // Categories
@@ -212,4 +213,127 @@ export async function getListings(searchTerm = "", signal, options = {}) {
     totalCount: matches.length,
     categories: CATEGORIES,
   };
+}
+
+/* Create Listing */
+
+export async function createListing(listing) {
+  const session = getSession();
+  const apiKey = import.meta.env.VITE_NOROFF_API_KEY;
+
+  if (!session?.accessToken) {
+    throw new Error("You must be logged in.");
+  }
+
+  if (!apiKey) {
+    throw new Error("Noroff API key is missing.");
+  }
+
+  // Validate Required Fields
+
+  if (!listing.title?.trim()) {
+    throw new Error("Please enter a title.");
+  }
+
+  const endDate = new Date(listing.endsAt);
+
+  if (Number.isNaN(endDate.getTime()) || endDate.getTime() <= Date.now()) {
+    throw new Error("Please choose a future end date.");
+  }
+
+  // Prepare Listing Data
+
+  const listingData = {
+    title: listing.title.trim(),
+    description: listing.description?.trim() || "",
+    tags: listing.tags || [],
+    media: listing.media || [],
+    endsAt: endDate.toISOString(),
+  };
+
+  // Send Listing to Noroff
+
+  const response = await fetch("https://v2.api.noroff.dev/auction/listings", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${session.accessToken}`,
+      "X-Noroff-API-Key": apiKey,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(listingData),
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    const message = result.errors?.[0]?.message || "Could not create listing.";
+
+    throw new Error(message);
+  }
+
+  return result.data;
+}
+
+/* Update Listing */
+
+export async function updateListing(id, changes) {
+  const session = getSession();
+  const apiKey = import.meta.env.VITE_NOROFF_API_KEY;
+
+  if (!session?.accessToken) {
+    throw new Error("You must be logged in.");
+  }
+
+  if (!apiKey) {
+    throw new Error("Noroff API key is missing.");
+  }
+
+  if (!id) {
+    throw new Error("Listing ID is missing.");
+  }
+
+  const response = await fetch(`${API_URL}/${encodeURIComponent(id)}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${session.accessToken}`,
+      "X-Noroff-API-Key": apiKey,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(changes),
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.errors?.[0]?.message || "Could not update listing.");
+  }
+
+  return result.data;
+}
+
+/* Delete Listing */
+
+export async function deleteListing(id) {
+  const session = getSession();
+  const apiKey = import.meta.env.VITE_NOROFF_API_KEY;
+
+  if (!session?.accessToken) {
+    throw new Error("You must be logged in.");
+  }
+
+  if (!apiKey) {
+    throw new Error("Noroff API key is missing.");
+  }
+
+  const response = await fetch(`${API_URL}/${encodeURIComponent(id)}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${session.accessToken}`,
+      "X-Noroff-API-Key": apiKey,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Could not delete listing: ${response.status}`);
+  }
 }

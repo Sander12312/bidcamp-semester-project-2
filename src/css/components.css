@@ -140,7 +140,7 @@
 /* Auction Cards */
 
 .listing-card {
-  @apply flex min-w-0 flex-col overflow-hidden
+  @apply relative flex min-w-0 flex-col overflow-hidden
     rounded-lg bg-card;
 
   box-shadow: 0 3px 4px rgb(0 0 0 / 18%);
@@ -185,6 +185,8 @@
   @apply size-4 shrink-0;
 }
 
+/* View Details */
+
 .listing-card-view-details {
   @apply mt-3 mb-4 hidden min-h-8 self-center
     items-center justify-center rounded-full border-2
@@ -196,246 +198,37 @@
     focus-visible:outline-primary md:inline-flex;
 }
 
-/* Authentication */
+/* Make the entire card clickable */
 
-.auth-layout {
-  @apply mx-auto w-full max-w-sm py-6 md:py-10;
-}
-
-.auth-tabs {
-  @apply mx-auto mb-4 grid w-52 grid-cols-2
-    overflow-hidden rounded-md bg-primary/70;
-}
-
-.auth-tab {
-  @apply px-3 py-2 text-center text-text-light;
-}
-
-.auth-tab-active {
-  @apply bg-primary;
-}
-
-.auth-card {
-  @apply flex flex-col rounded-lg bg-primary
-    p-6 text-text-light shadow-md;
-}
-
-.auth-brand,
-.auth-title,
-.auth-description {
-  @apply text-center;
-}
-
-.auth-form {
-  @apply mt-5 flex flex-col gap-3;
-}
-
-.auth-field {
-  @apply flex flex-col gap-1;
-}
-
-.auth-input {
-  @apply w-full rounded-md border border-transparent
-    bg-text-light px-3 py-2.5 text-text-dark
-    focus-visible:border-cta focus-visible:outline-2
-    focus-visible:outline-cta;
-}
-
-.auth-submit {
-  @apply mt-3 w-full;
-}
-
-.auth-divider {
-  @apply mt-5 flex items-center gap-3;
-}
-
-.auth-divider span:first-child,
-.auth-divider span:last-child {
-  @apply h-px flex-1 bg-text-light/50;
-}
-
-.auth-secondary-link {
-  @apply mt-3 w-full;
-}
-
-/* Authenticated Navigation */
-
-.auth-credits {
-  @apply inline-flex min-h-11 shrink-0 items-center
-    justify-center whitespace-nowrap rounded-full
-    bg-cta px-4 text-sm font-bold text-text-dark;
-}
-
-.auth-credits-mobile {
-  @apply ml-auto min-h-9 px-2 text-[10px] md:hidden;
-}
-
-.auth-credits-mobile[hidden],
-.auth-profile-menu[hidden] {
-  display: none;
-}
-
-.auth-icon-button {
-  @apply inline-flex size-11 items-center justify-center
-    rounded-md text-text-light
-    transition-opacity duration-200
-    hover:opacity-80
-    focus-visible:outline-2
-    focus-visible:outline-offset-2
-    focus-visible:outline-cta;
-}
-
-.auth-icon-button:disabled {
-  @apply cursor-not-allowed opacity-70;
-}
-
-.auth-profile-wrapper {
-  @apply relative;
-}
-
-.auth-profile-menu {
-  @apply absolute top-full right-0 z-50 mt-2
-    w-52 rounded-lg border border-text-light/20
-    bg-primary p-3 text-text-light shadow-xl;
-}
-
-.auth-profile-name {
-  @apply mb-2 border-b border-text-light/30
-    pb-2 text-sm font-semibold;
-}
-
-.auth-profile-action,
-.auth-mobile-logout {
-  @apply w-full rounded-md px-3 py-2
-    text-left text-sm font-medium
-    text-text-light transition-colors duration-200
-    hover:bg-text-light/15
-    focus-visible:outline-2
-    focus-visible:outline-cta;
-}
-
-.auth-profile-action:disabled {
-  @apply cursor-not-allowed opacity-60;
-}
-
-/* Profile Page */
-
-.profile-section {
-  @apply py-5 md:py-8;
-}
-
-.profile-layout {
-  @apply mx-auto w-full max-w-4xl;
-}
-
-/* Profile Banner */
-
-.profile-banner {
-  @apply relative h-40 overflow-hidden
-    rounded-lg bg-modal md:h-52;
-
-  background-image: linear-gradient(120deg, #3a1a3b, #7b0b7d);
-}
-
-.profile-banner-image {
-  @apply h-full w-full object-cover;
-
-  filter: brightness(0.8) contrast(1.2);
-}
-
-.profile-banner::after {
+.listing-card-view-details::after {
   content: "";
-  @apply absolute inset-0;
-
-  background: linear-gradient(to top, rgb(0 0 0 / 65%), transparent 75%);
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
-.profile-banner-content {
-  @apply absolute right-4 bottom-3 left-4 z-10
-    flex items-end gap-3
-    md:right-8 md:bottom-5 md:left-8;
+/* Invisible full-card link on mobile */
+
+@media (max-width: 767px) {
+  .listing-card-view-details {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+    z-index: 1;
+  }
 }
 
-.profile-avatar,
-.profile-avatar-fallback {
-  @apply flex size-20 shrink-0 items-center
-    justify-center rounded-full border-2
-    border-cta object-cover md:size-24;
-}
+/* Keyboard Accessibility */
 
-.profile-avatar-fallback {
-  @apply bg-primary text-3xl font-bold
-    uppercase text-text-light;
-}
-
-.profile-banner-identity {
-  @apply flex min-w-0 flex-col
-    items-start gap-1;
-}
-
-.profile-banner-name {
-  @apply max-w-full break-words
-    text-xl font-bold text-text-light
-    md:hidden;
-}
-
-.profile-edit-button {
-  @apply rounded-full bg-primary px-3 py-1
-    text-xs font-semibold text-text-light;
-}
-
-.profile-edit-button:disabled {
-  @apply cursor-not-allowed opacity-80;
-}
-
-/* Profile Information */
-
-.profile-overview {
-  @apply mt-5 flex flex-col gap-5
-    md:grid md:grid-cols-2 md:gap-10;
-}
-
-.profile-about {
-  @apply min-w-0;
-}
-
-.profile-name {
-  @apply hidden text-2xl font-bold
-    text-text-dark md:block;
-}
-
-.profile-bio {
-  @apply whitespace-pre-line text-sm
-    leading-relaxed text-text-dark
-    md:mt-2;
-}
-
-/* Credit Score */
-
-.profile-credit-panel {
-  @apply flex flex-col items-center gap-3
-    rounded-lg bg-cta/60 p-5
-    text-text-dark
-    md:items-start md:justify-center
-    md:rounded-none md:border-l-2
-    md:border-text-dark md:bg-transparent
-    md:pl-10;
-}
-
-.profile-credit-title {
-  @apply text-xl font-bold;
-}
-
-.profile-credits-badge {
-  @apply gap-2 px-5;
-}
-
-.profile-credit-coin {
-  @apply inline-flex size-5 shrink-0
-    items-center justify-center
-    rounded-full border-2
-    border-text-dark
-    text-xs font-bold;
+.listing-card:focus-within {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 /* Accessibility */
